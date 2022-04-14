@@ -21,9 +21,13 @@ app.use(express.json())
 
 app.use(express.static('uploads'))
 
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
   console.log('Time', Date.now(), req.method, req.originalUrl)
   next()
+})
+
+app.get('/', (req, res) => {
+  res.send('<h1>Hehe</h1>')
 })
 
 app.use('/api/comments', commentRouter)
@@ -31,7 +35,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/posts', postRouter)
 app.use('/api/upload', uploadRouter)
 
-app.listen( process.env.PORT || 8080, (err) => {
+app.listen(process.env.PORT || 8080, (err) => {
   if (err) {
     return console.log("Error start app", err);
   }
